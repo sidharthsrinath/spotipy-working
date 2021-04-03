@@ -63,13 +63,11 @@ def get_song_features(spotify, songid): #getting the data of a song (dancability
 	'time_signature' : features['time_signature']
 	}
 
-	# print('Recieved Song Data for {}'.format(songid))
 
 	return song_features
 
 def get_song_data(spotify, songid):
 	data = spotify.track(songid)
-	# print(f'Song: {songid} was unable to be found')
 
 	song_data = {
 	'song_name' : data['name'],
@@ -81,7 +79,6 @@ def get_song_data(spotify, songid):
 	'song_popularity' : data['popularity'],
 	'song_id' : songid,
 	}
-	# song_data['song_genres'] = get_song_genre(song_data['artist_id'])
 
 	print('Recieved Song Data for {}'.format(songid))
 
@@ -89,10 +86,6 @@ def get_song_data(spotify, songid):
 	return song_data
 
 def get_playlist(spotify, id): #extract and distribute info from a playlist to helper functions
-	#complete for right now
-
-	#in case we need to do this before the auth
-	# spotify = spotipy.Spotify(auth_manager=SpotifyClientCredentials())
 
 	playlist = spotify.playlist(id) #returns a dict
 
@@ -142,10 +135,6 @@ def to_csv(dictionaries, headers,names):
 
 
 def make_playlist(spotify, username, df, playlist_name):
-
-	#Credentials to access to  the Spotify User's Playlist, Favorite Songs, etc. 
-	# token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri) 
-	# sp = spotipy.Spotify(auth=token)
 
 	hi_name = 'High Energy: ' + playlist_name
 	lo_name = 'Low Energy: ' + playlist_name
