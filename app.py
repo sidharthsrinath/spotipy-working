@@ -79,7 +79,7 @@ def get_song_data(spotify, songid):
 	'song_popularity' : data['popularity'],
 	'song_id' : songid,
 	}
-
+	
 	print('Recieved Song Data for {}'.format(songid))
 
 
@@ -135,22 +135,21 @@ def to_csv(dictionaries, headers,names):
 
 
 def make_playlist(spotify, username, df, playlist_name):
-
 	hi_name = 'High Energy: ' + playlist_name
 	lo_name = 'Low Energy: ' + playlist_name
 	username = username.replace('spotify:user:','')
 
 	high_energy = spotify.user_playlist_create(user=username,
 											name=hi_name,
-											description= 'High energy songs from' + playlist_name)
+											description= 'https://github.com/sidharthsrinath/spotipy-working')
 	print('Created High Energy Playlist')
 	low_energy = spotify.user_playlist_create(user=username,
 											name=lo_name, 
-											description = 'Low energy songs from' + playlist_name)
+											description = 'https://github.com/sidharthsrinath/spotipy-working')
 	print('Created Low Energy Playlist')
 
-	playlist_1 = df[df['KMeans']==0] #low energy
-	playlist_2 = df[df['KMeans']==1] #high energy
+	playlist_1 = df[df['KMeans']==1] #low energy
+	playlist_2 = df[df['KMeans']==0] #high energy
 
 	id0 = list(playlist_1['song_id']) #low energy
 	id1 = list(playlist_2['song_id']) #high energy
@@ -164,7 +163,8 @@ def make_playlist(spotify, username, df, playlist_name):
 		thisid = x
 		thisidN = thisid.strip()
 		spotify.user_playlist_add_tracks(user = username,playlist_id= high_energy['id'],tracks = [thisidN])
-	print('Added Songs to Low Energy Playlist')
+	print('Added Songs to High Energy Playlist')
+
 
 def change_scope(filename):
 	str = ''
